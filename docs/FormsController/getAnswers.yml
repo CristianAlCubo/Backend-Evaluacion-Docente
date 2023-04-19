@@ -1,0 +1,51 @@
+/api/v1/form/getAnswers/{idTeacher}:
+  get:
+    tags:
+      - Form
+    description: Obtener todas las evaluaciones que se le han hecho a un docente. [Token de AUTORIZACIÓN requerido]
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+    parameters:
+      - name: idTeacher
+        in: path
+        description: ID del docente del cual se quieren obtener las evaluaciones
+        required: true
+        type: integer
+
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/EvaluationsResponse"
+            example:
+              state: true
+              answers:
+                [
+                  [
+                    {
+                      question: "¿Que tan a menudo el docente prepara sus clases?",
+                      answer: "Casi nunca",
+                    },
+                  ],
+                  [
+                    {
+                      question: "¿Que tan a menudo el docente prepara sus clases?",
+                      answer: "Nunca",
+                    },
+                  ],
+                ]
+
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al obtener el listado
+              error: Error en el servidor

@@ -1,0 +1,39 @@
+/api/v1/form/postanswers:
+  post:
+    tags:
+      - Form
+    description: Registrar las respuestas de una evaluación a un docente. [Token de ESTUDIANTE requerido]
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+    requestBody:
+      required: true
+      description: En el campo 'answers' del cuerpo de la petición, se debe envíar un arreglo con los ID de las opciones que el usuario selecciono durante la evaluación.
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/FormAnswers"
+          example:
+            userId: 1
+            answers: [1, 6, 9]
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SuccessResponse"
+            example:
+              state: true
+              message: "Respuestas almacenadas con exito"
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al almacenar las respuestas
+              error: El usuario no existe

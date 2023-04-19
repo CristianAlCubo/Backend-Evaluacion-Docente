@@ -1,0 +1,63 @@
+definitions:
+  Question:
+    type: object
+    properties:
+      question:
+        type: string
+      options:
+        type: array
+        items:
+          type: object
+          properties:
+            opcion:
+              type: string
+
+  QuestionStatement:
+    type: object
+    properties:
+      question:
+        type: string
+      id:
+        type: number
+
+  GetQuestionsSuccessResponse:
+    type: object
+    properties:
+      state:
+        type: boolean
+      questions:
+        type: array
+        items:
+          $ref: "#/definitions/QuestionStatement"
+
+  Options:
+    type: object
+    properties:
+      id:
+        type: number
+      option:
+        type: string
+
+  GetOptionsSuccessResponse:
+    type: object
+    properties:
+      state:
+        type: boolean
+      message:
+        type: string
+      options:
+        type: array
+        items:
+          $ref: "#/definitions/Options"
+
+  QuestionUpdateBody:
+    type: object
+    properties:
+      question:
+        type: string
+
+  AnswerUpdateBody:
+    type: object
+    properties:
+      opcion:
+        type: string

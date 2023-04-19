@@ -1,0 +1,27 @@
+/api/v1/user/getUsers:
+  get:
+    tags:
+      - Users
+    description: Obtener un listado con los datos publicos de todos los estudiantes. [Token de ADMIN requerido]
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/AllUsersResponse"
+
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al consultar el listado de estudiantes
+              error: Error en el servidor

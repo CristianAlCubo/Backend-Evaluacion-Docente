@@ -1,0 +1,44 @@
+/api/v1/questions/create:
+  post:
+    tags:
+      - Questions
+    description: Registrar una nueva pregunta con sus respectivas opciones. [Token de ADMIN requerido]
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/Question"
+          example:
+            question: "¿Qué hora es?"
+            options:
+              [
+                { "opcion": "12:00AM" },
+                { "opcion": "12:00PM" },
+                { "opcion": "06:00AM" },
+                { "opcion": "06:00PM" },
+              ]
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SuccessResponse"
+            example:
+              state: true
+              message: "Pregunta creada exitosamente"
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al crear la pregunta
+              error: Error en el servidor

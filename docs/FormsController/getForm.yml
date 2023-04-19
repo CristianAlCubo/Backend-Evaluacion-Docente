@@ -1,0 +1,57 @@
+/api/v1/form/getQuestions:
+  get:
+    tags:
+      - Form
+    description: Obtener todas las preguntas y respuestas del formulario. [Token de AUTORIZACIÓN requerido]
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/FormResponse"
+            example:
+              state: true
+              questions:
+                [
+                  {
+                    id: 1,
+                    question: "¿Qué dia es hoy",
+                    answers:
+                      [
+                        { id: 1, answer: "Lunes", question_id: 1 },
+                        { id: 2, answer: "Martes", question_id: 1 },
+                        { id: 3, answer: "Miercoles", question_id: 1 },
+                        { id: 4, answer: "Jueves", question_id: 1 },
+                        { id: 5, answer: "Viernes", question_id: 1 },
+                        { id: 6, answer: "Sabado", question_id: 1 },
+                        { id: 7, answer: "Domingo", question_id: 1 },
+                      ],
+                  },
+                  {
+                    id: 2,
+                    question: "¿Qué hora es",
+                    answers:
+                      [
+                        { id: 8, answer: "12:00AM", question_id: 2 },
+                        { id: 9, answer: "12:00PM", question_id: 2 },
+                        { id: 10, answer: "06:00AM", question_id: 2 },
+                        { id: 11, answer: "06:00PM", question_id: 2 },
+                      ],
+                  },
+                ]
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al obtener el listado
+              error: El usuario no existe

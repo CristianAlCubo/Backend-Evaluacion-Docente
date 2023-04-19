@@ -1,0 +1,33 @@
+/api/v1/questions/getQuestions:
+  get:
+    tags:
+      - Questions
+    description: Obtener un listado de todas las preguntas (sin respuestas) con su respectivo ID. [Token de AUTORIZACIÓN requerido]
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/GetQuestionsSuccessResponse"
+            example:
+              state: true
+              questions:
+                [
+                  { question: "¿Qué día es hoy", id: 1 },
+                  { question: "¿Qué hora es", id: 2 },
+                ]
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al listar las preguntas
+              error: Error en el servidor

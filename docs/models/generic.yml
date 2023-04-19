@@ -1,0 +1,25 @@
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerForamt: JWT
+
+definitions:
+  SuccessResponse:
+    type: object
+    properties:
+      state:
+        type: boolean
+      message:
+        type: string
+
+  ErrorResponse:
+    type: object
+    properties:
+      state:
+        type: boolean
+      message:
+        type: string
+      error:
+        type: string

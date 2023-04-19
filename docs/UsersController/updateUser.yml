@@ -1,0 +1,55 @@
+/api/v1/user/update/{userId}:
+  put:
+    tags:
+      - Users
+    description: Actualizar los datos de un usuario. [Token de ADMIN requerido]
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: path
+        name: userId
+        schema:
+          type: integer
+        required: true
+        description: ID del usuario a ser actualizado.
+    requestBody:
+      description: Al actualizar los datos del usuario se debe enviar un JSON con cada propiedad a ser actualizada. Se debe actualizar un mínimo de 1 propiedad, o de lo contrario el servidor retornará un error.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/User"
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SuccessResponse"
+            example:
+              state: true
+              message: "Actualización realizada con exito"
+
+      404:
+        description: Usuario no encontrado.
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al actualizar
+              error: El usuario con id 1 no se encuentra registrado.
+
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al actualizar
+              error: Error en el servidor

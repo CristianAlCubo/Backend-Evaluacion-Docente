@@ -1,0 +1,40 @@
+/api/v1/login:
+  post:
+    tags:
+      - Login
+    description: Iniciar sesión
+    produces:
+      - application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/UserLogin"
+          example:
+            email: "admin@mail.com"
+            password: "password"
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/UserLoginResponse"
+            example:
+              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+              state: true
+              id: 1
+              name: "john doe"
+              role: "admin"
+              message: "Ingreso exitoso"
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al intentar iniciar sesión
+              error: Contraseña o email invalido

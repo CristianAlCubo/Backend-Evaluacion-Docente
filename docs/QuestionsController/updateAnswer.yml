@@ -1,0 +1,44 @@
+/api/v1/questions/updateAnswer/{idAnswer}:
+  put:
+    tags:
+      - Questions
+    description: Actualizar el enunciado de una respuesta. [Token de ADMIN requerido]
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: path
+        name: idAnswer
+        schema:
+          type: number
+        required: true
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/AnswerUpdateBody"
+          example:
+            opcion: "Nueva opción"
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SuccessResponse"
+            example:
+              state: true
+              message: "Opcion editada con exito"
+
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al editar la opcion
+              error: Error en el servidor

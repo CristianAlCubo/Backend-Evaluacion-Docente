@@ -1,0 +1,37 @@
+/api/v1/user/create:
+  post:
+    tags:
+      - Users
+    description: Registrar un nuevo usuario. [Token de ADMIN requerido]
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+    headers:
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/User"
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/UserCreationSuccessResponse"
+            example:
+              state: true
+              message: "Usuario creado correctamente"
+              id: 1
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Fallo en la creación del usuario
+              error: Error en el servidor

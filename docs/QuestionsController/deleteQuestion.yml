@@ -1,0 +1,36 @@
+/api/v1/questions/deleteQuestion/{questionId}:
+  delete:
+    tags:
+      - Questions
+    description: Eliminar el enunciado de una pregunta. [Token de ADMIN requerido]
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: path
+        name: idQuestion
+        schema:
+          type: number
+        required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SuccessResponse"
+            example:
+              state: true
+              message: "Pregunta eliminada con exito"
+
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al eliminar la pregunta
+              error: Error en el servidor

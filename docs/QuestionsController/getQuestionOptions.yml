@@ -1,0 +1,42 @@
+/api/v1/questions/getOptions/{idQuestion}:
+  get:
+    tags:
+      - Questions
+    description: Obtener un listado de todas las respuestas de una determinada pregunta. [Token de AUTORIZACIÓN requerido]
+    parameters:
+      - in: path
+        name: idQuestion
+        schema:
+          type: number
+        required: true
+    security:
+      - BearerAuth: []
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/GetOptionsSuccessResponse"
+            example:
+              state: true
+              message: "Listado de opciones"
+              options:
+                [
+                  { id: 1, option: "12:00AM" },
+                  { id: 2, option: "12:00PM" },
+                  { id: 3, option: "06:00AM" },
+                  { id: 4, option: "06:00PM" },
+                ]
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al obtener el listado de opciones
+              error: Error en el servidor

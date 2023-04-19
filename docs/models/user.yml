@@ -1,0 +1,88 @@
+definitions:
+  UserCreationSuccessResponse:
+    type: object
+    properties:
+      state:
+        type: boolean
+      message:
+        type: string
+      id:
+        type: number
+  UserLogin:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  User:
+    type: object
+    properties:
+      firstName:
+        type: string
+      secondName:
+        type: string
+      surname:
+        type: string
+      secondSurname:
+        type: string
+      documentTypeId:
+        type: number
+      documentNumber:
+        type: string
+      rolId:
+        type: number
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+
+  UserLoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+      state:
+        type: boolean
+      id:
+        type: number
+      name:
+        type: string
+      role:
+        type: string
+      message:
+        type: string
+
+  UserPublicData:
+    type: object
+    properties:
+      firstName:
+        type: string
+      secondName:
+        type: string
+      surname:
+        type: string
+      secondSurname:
+        type: string
+      documentTypeId:
+        type: number
+      documentNumber:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+
+  AllUsersResponse:
+    type: object
+    properties:
+      state:
+        type: boolean
+      message:
+        type: string
+      users:
+        type: array
+        items:
+          $ref: "#/definitions/UserPublicData"

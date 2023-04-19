@@ -1,0 +1,44 @@
+/api/v1/questions/updateQuestion/{questionId}:
+  put:
+    tags:
+      - Questions
+    description: Actualizar el enunciado de una pregunta. [Token de ADMIN requerido]
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: path
+        name: idQuestion
+        schema:
+          type: number
+        required: true
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/QuestionUpdateBody"
+          example:
+            question: "¿Cuál es el sentido de la vida?"
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/SuccessResponse"
+            example:
+              state: true
+              message: "Pregunta editada con exito"
+
+      500:
+        description: Petición fallida
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+            example:
+              state: false
+              message: Error al editar la pregunta
+              error: Error en el servidor
